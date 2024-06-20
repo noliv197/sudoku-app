@@ -2,7 +2,7 @@ import { generateSudokuMap,generateRandomNumber } from "./functions.js";
 
 function generateInput(value){
     let input = document.createElement('input');
-    input.disabled = true;
+    input.disabled = false;
     input.value = value;
 
     return input;

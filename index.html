@@ -21,5 +21,40 @@
         Created by Natalia Oliveira and Diego Cevallos
     </footer>
 </body>
-<script type="module" src="./app/index.js"></script>
+<script>
+
+function generateSudokuMap(value=''){
+    new Array(9).fill(value);
+}
+
+function generateInput(value){
+    let input = document.createElement('input');
+    input.disabled = false;
+    input.value = value;
+
+    return input;
+}
+generateEmptyTable();
+
+document.querySelector('[data-btn="newGame"]').addEventListener('click', ()=>{
+    Math.floor(Math.random() * 9) + 1;
+})
+
+function generateEmptyTable(){
+    let table = document.querySelector('table');
+
+    for (let index = 0; index < 9; index++) {
+        let rowValues = generateSudokuMap();
+        let row = document.createElement('tr');
+        rowValues.forEach(value => {
+            let input = generateInput(value);
+            row.appendChild(input);
+        });
+
+        table.appendChild(row);
+    }
+}
+
+generateEmptyTable();
+</script>
 </html>
