@@ -1,37 +1,87 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    text-align: center;
+}
+
 input{
     width: 50px;
     height: 50px;
-    border-style:outset ;
-    border-width: 1px;
+    border: 1px solid silver;
     margin: 0px;
+    text-align: center;
+    font-size: 16px;
 }
-input:hover {
-    border: solid;
-    border-color: silver;
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+input:focus {
+    outline: 1px auto lightslategrey;
+}
+
+input:disabled{
+    background-color: rgb(234, 232, 232);
+}
+
 .buttons-container{
     display: flex;
     justify-content: center;
+    gap: 1rem;
 }
+
 button {
     padding: 10px;
+    border-radius: 4px;
+    background-color: rgb(252, 243, 233);
+    font-weight: 700;
 }
-button:hover {
+
+button:not([disabled]):hover {
     background-color: green;
     transition: all 0.5s ease-in-out;
     color: white;
     cursor: pointer;
 
 }
-h1 {
-    text-align: center;
-}
+
 .table-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+table {
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+table input:nth-child(3n) {
+    border-right: 2px solid black;
+}
+
+table tr:nth-child(3n) input {
+    border-bottom: 2px solid black;
+}
+
 footer {
     display: flex;
     justify-content: center;
+
 }
