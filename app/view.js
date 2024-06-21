@@ -35,7 +35,7 @@ export function generateGameTable(){
             input.value = number;
             input.setAttribute('disabled', '');
         } else {
-            input.value = ''
+            input.value = '';
             input.removeAttribute('disabled');
         }
     })
