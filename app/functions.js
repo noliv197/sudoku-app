@@ -75,6 +75,13 @@ function fillGrid(grid) {
 }
 
 ///////////////////////////////////////////////////////////
+export function isValueNumber(value) {
+  // Check if the value is a number
+  const isNumber = !isNaN(value) && value.trim() !== '';
+
+  return isNumber;
+}
+
 export function generateSudokuMap(value=''){
   let grid = [];
   // Generate 9x9 Grid with value provided

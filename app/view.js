@@ -1,4 +1,4 @@
-import { generateSudokuMap, generateSudokuGrid } from "./functions.js";
+import { generateSudokuMap, generateSudokuGrid, isValueNumber } from "./functions.js";
 
 // Create Default Input Element
 function generateInput(value){
@@ -10,6 +10,27 @@ function generateInput(value){
     input.min = 1;
 
     return input;
+}
+
+export function checkInputs() {
+    // Select all input elements with the class 'input-field'
+    const inputs = document.querySelectorAll('input');
+        let allValid = true;
+
+        // Loop through the inputs and check if they all have valid values
+        inputs.forEach(input => {
+            if (!isValueNumber(input.value)) {
+                allValid = false;
+            }
+        });
+     
+    const validateButton = document.querySelector('#validate-button');
+
+    if (allValid) {
+        validateButton.disabled = false;
+    } else {
+        validateButton.disabled = true;
+    }
 }
 
 // Generate Default Table to Start Application
