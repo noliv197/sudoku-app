@@ -1,5 +1,6 @@
-import { generateSudokuMap,generateRandomNumber } from "./functions.js";
+import { generateSudokuMap, generateSudokuGrid } from "./functions.js";
 
+// Create Default Input Element
 function generateInput(value){
     let input = document.createElement('input');
     input.disabled = true;
@@ -11,32 +12,45 @@ function generateInput(value){
     return input;
 }
 
+// Generate Default Table to Start Application
 export function generateEmptyTable(){
     let table = document.querySelector('table');
+    // Generate 9x9 Grid with empty values
+    let emptySudokuGrid = generateSudokuMap();
 
-    for (let index = 0; index < 9; index++) {
-        let rowValues = generateSudokuMap();
-        let row = document.createElement('tr');
-        rowValues.forEach(value => {
+    emptySudokuGrid.forEach(row => {
+        //Create Tr Element for each grid row
+        let tableRow = document.createElement('tr');
+        row.forEach(value => {
+            // Create input element for each row column
             let input = generateInput(value);
-            row.appendChild(input);
+            tableRow.appendChild(input);
         });
-
-        table.appendChild(row);
-    }
+    
+        table.appendChild(tableRow);
+    });
 }
 
 export function generateGameTable(){
-    document.querySelectorAll('input').forEach( input => {
-        
-        let number = generateRandomNumber(); //test
-        
-        if(number - 1 > 3){
-            input.value = number;
-            input.setAttribute('disabled', '');
-        } else {
-            input.value = '';
-            input.removeAttribute('disabled');
-        }
-    })
+    // Genarate solved sudoku grid
+    let sudokuGrid  = generateSudokuGrid();
+    const rows = document.querySelectorAll('tr');
+
+    rows.forEach((row, rowIndex) => {
+        const rowCells = row.children;
+        // Transform element node into array
+        Array.prototype.forEach.call(rowCells, (input, cellIndex) => {
+            let num = sudokuGrid[rowIndex][cellIndex]
+
+            if(num >5){ // test
+                // if value exists set input value and disable input 
+                input.value = num;
+                input.setAttribute('disabled', '');
+            } else {
+                // if value does not exist clear input value and enable input 
+                input.value = '';
+                input.removeAttribute('disabled');
+            }
+        });
+      });
 }
