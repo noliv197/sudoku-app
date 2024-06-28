@@ -145,7 +145,6 @@ export function hideCells(grid, count){
   
   blocks.forEach(block => {
     let coords = generateUniqueMap(block.row, block.col, count)
-    console.log(coords)
     coords.forEach(coord => {
       grid[coord[0]][coord[1]] = '';
     })

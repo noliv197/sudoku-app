@@ -33,10 +33,18 @@ export function checkInputs() {
     }
 }
 
-export function changeDifficulty(e){
+export function validateUserInput(event){
+    if(event.keyCode < 49 || event.keyCode > 57){
+        event.preventDefault();
+    } else if(event.target.value){
+        event.target.value = '';
+    }
+}
+
+export function changeDifficulty(event){
     document.querySelector('button.selected').classList.remove('selected');
-    e.target.classList.add('selected');
-    switch(e.target.name){
+    event.target.classList.add('selected');
+    switch(event.target.name){
         case 'easy':
             generateGameTable(5);
             break;

@@ -1,4 +1,4 @@
-import { generateEmptyTable, generateGameTable, checkInputs, changeDifficulty } from "./view.js";
+import { generateEmptyTable, generateGameTable, checkInputs, changeDifficulty, validateUserInput } from "./view.js";
 
 generateEmptyTable();
 
@@ -19,10 +19,9 @@ document.querySelector('[data-btn="newGame"]').addEventListener('click', ()=>{
 
 document.querySelectorAll('input').forEach(input => {
     input.addEventListener('input', checkInputs);
+    input.addEventListener('keypress', (e) => validateUserInput(e))
 });
 
 document.querySelectorAll('button.btn-level').forEach(button =>{
     button.addEventListener('click', (e) => changeDifficulty(e))
 })
-
-checkInputs();
