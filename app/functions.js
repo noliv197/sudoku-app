@@ -1,6 +1,7 @@
 // Generate random number between idx range
-function generateRandomNumber(idx){
-  return  Math.floor( Math.random() * ( idx + 1 ) );
+function generateRandomNumber(min,max){
+  // return  Math.floor( Math.random() * ( idx + 1 ) );
+  return  Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Get array and shuffles values
@@ -8,7 +9,7 @@ function shuffle(arr) {
   // starts from the last element of the array
   for (let i = arr.length - 1; i > 0; i--) {
     //  For each iteration, get an random index
-    const j = generateRandomNumber(i);
+    const j = generateRandomNumber(0,i);
     // swap the elements
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
@@ -100,4 +101,71 @@ export function generateSudokuGrid() {
 
   // Implement empty some values
   return grid;
+}
+
+export function hideCells(grid, count){
+  let blocks = [
+    {
+      col: {min: 0, max: 2},
+      row: {min: 0, max: 2}
+    },
+    {
+      col: {min: 0, max: 2},
+      row: {min: 3, max: 5}
+    },
+    {
+      col: {min: 0, max: 2},
+      row: {min: 6, max: 8}
+    },
+    {
+      col: {min: 3, max: 5},
+      row: {min: 0, max: 2}
+    },
+    {
+      col: {min: 3, max: 5},
+      row: {min: 3, max: 5}
+    },
+    {
+      col: {min: 3, max: 5},
+      row: {min: 6, max: 8}
+    },
+    {
+      col: {min: 6, max: 8},
+      row: {min: 0, max: 2}
+    },
+    {
+      col: {min: 6, max: 8},
+      row: {min: 3, max: 5}
+    },
+    {
+      col: {min: 6, max: 8},
+      row: {min: 6, max: 8}
+    },
+  ]
+  
+  blocks.forEach(block => {
+    let coords = generateUniqueMap(block.row, block.col, count)
+    console.log(coords)
+    coords.forEach(coord => {
+      grid[coord[0]][coord[1]] = '';
+    })
+  })
+  return grid;
+}
+
+function generateUniqueMap(row, col, amount){
+  let coordMap = [];
+  let counter = 0;
+
+  while (counter < amount) {
+    let colCoord = generateRandomNumber(col.min,col.max)
+    let rowCoord = generateRandomNumber(row.min,row.max)
+    let coord = rowCoord.toString()+colCoord.toString()
+    if(coordMap.indexOf(coord) === -1){
+      coordMap.push(coord)
+      counter++
+    } 
+  }
+
+  return coordMap
 }

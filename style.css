@@ -55,10 +55,39 @@ button {
 
 button:not([disabled]):hover {
     background-color: green;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.25s ease-in-out;
     color: white;
     cursor: pointer;
 
+}
+
+button[name="easy"].selected {
+    color: white;
+    background-color: green;
+}
+
+button[name="easy"]:hover {
+    color: white;
+    background-color: rgb(6, 81, 6);
+}
+
+button[name="medium"].selected {
+    background-color: yellow;
+}
+
+button[name="medium"]:hover {
+    color: black;
+    background-color: rgb(177, 177, 39);
+}
+
+button[name="hard"].selected {
+    color: white;
+    background-color: red;
+}
+
+button[name="hard"]:hover {
+    color: white;
+    background-color: rgb(174, 13, 13);
 }
 
 .table-container {

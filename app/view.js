@@ -1,4 +1,4 @@
-import { generateSudokuMap, generateSudokuGrid, isValueNumber } from "./functions.js";
+import { generateSudokuMap, generateSudokuGrid, isValueNumber, hideCells } from "./functions.js";
 
 // Create Default Input Element
 function generateInput(value){
@@ -33,6 +33,22 @@ export function checkInputs() {
     }
 }
 
+export function changeDifficulty(e){
+    document.querySelector('button.selected').classList.remove('selected');
+    e.target.classList.add('selected');
+    switch(e.target.name){
+        case 'easy':
+            generateGameTable(5);
+            break;
+        case 'medium':
+            generateGameTable(6);
+            break;
+        case 'hard':
+            generateGameTable(7);
+            break;
+    }
+}
+
 // Generate Default Table to Start Application
 export function generateEmptyTable(){
     let table = document.querySelector('table');
@@ -52,9 +68,10 @@ export function generateEmptyTable(){
     });
 }
 
-export function generateGameTable(){
+export function generateGameTable(difficulty){
     // Genarate solved sudoku grid
     let sudokuGrid  = generateSudokuGrid();
+    sudokuGrid = hideCells(sudokuGrid,difficulty);
     const rows = document.querySelectorAll('tr');
 
     rows.forEach((row, rowIndex) => {
@@ -63,7 +80,7 @@ export function generateGameTable(){
         Array.prototype.forEach.call(rowCells, (input, cellIndex) => {
             let num = sudokuGrid[rowIndex][cellIndex]
 
-            if(num >5){ // test
+            if(num){ // test
                 // if value exists set input value and disable input 
                 input.value = num;
                 input.setAttribute('disabled', '');
