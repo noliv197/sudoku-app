@@ -1,4 +1,4 @@
-import { generateSudokuMap, generateSudokuGrid, isValueNumber, hideCells } from "./functions.js";
+import { generateSudokuMap, generateSudokuGrid, isValueNumber, hideCells, validateBoard } from "./functions.js";
 
 // Create Default Input Element
 function generateInput(value){
@@ -77,6 +77,10 @@ export function generateEmptyTable(){
 }
 
 export function generateGameTable(difficulty){
+    document.querySelectorAll('h2').forEach(message =>{
+        message.style.display = 'none';
+    })
+    document.querySelector('#validate-button').setAttribute('disabled','')
     // Genarate solved sudoku grid
     let sudokuGrid  = generateSudokuGrid();
     sudokuGrid = hideCells(sudokuGrid,difficulty);
@@ -100,3 +104,8 @@ export function generateGameTable(difficulty){
         });
       });
 }
+
+
+  
+  
+ 

@@ -1,4 +1,4 @@
-import { generateEmptyTable, generateGameTable, checkInputs, changeDifficulty, validateUserInput } from "./view.js";
+import { generateEmptyTable, generateGameTable, checkInputs, changeDifficulty, validateUserInput,} from "./view.js";
 
 generateEmptyTable();
 
@@ -6,7 +6,7 @@ document.querySelector('[data-btn="newGame"]').addEventListener('click', ()=>{
     let levelButton = document.querySelector('button.selected')
     switch(levelButton.name){
         case 'easy':
-            generateGameTable(5);
+            generateGameTable(1);
             break;
         case 'medium':
             generateGameTable(6);
@@ -24,14 +24,5 @@ document.querySelectorAll('input').forEach(input => {
 
 document.querySelectorAll('button.btn-level').forEach(button =>{
     button.addEventListener('click', (e) => changeDifficulty(e))
-    let table = document.querySelectorAll('input');
-    for(let input of table){
-        input.removeAttribute('disabled');
-        
-    }
-console.log(document.querySelectorAll('input'));
 
-
-
-    generateGameTable();
 })

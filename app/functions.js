@@ -1,3 +1,21 @@
+
+const blocksCoords=[
+  ['00','01','02','10','11','12','20','21','22'],
+  ['03','04','05','13','14','15','23','24','25'],
+  ['06','07','08','16','17','18','26','27','28'],
+
+  ['30','31','32','40','41','42','50','51','52'],
+  ['33','34','35','43','44','45','53','54','55'],
+  ['36','37','38','46','47','48','56','57','58'],
+
+  ['60','61','62','70','71','72','80','81','82'],
+  ['63','64','65','73','74','75','83','84','85'],
+  ['66','67','68','76','77','78','86','87','88'],
+]
+
+
+
+
 // Generate random number between idx range
 function generateRandomNumber(min,max){
   // return  Math.floor( Math.random() * ( idx + 1 ) );
@@ -104,67 +122,79 @@ export function generateSudokuGrid() {
 }
 
 export function hideCells(grid, count){
-  let blocks = [
-    {
-      col: {min: 0, max: 2},
-      row: {min: 0, max: 2}
-    },
-    {
-      col: {min: 0, max: 2},
-      row: {min: 3, max: 5}
-    },
-    {
-      col: {min: 0, max: 2},
-      row: {min: 6, max: 8}
-    },
-    {
-      col: {min: 3, max: 5},
-      row: {min: 0, max: 2}
-    },
-    {
-      col: {min: 3, max: 5},
-      row: {min: 3, max: 5}
-    },
-    {
-      col: {min: 3, max: 5},
-      row: {min: 6, max: 8}
-    },
-    {
-      col: {min: 6, max: 8},
-      row: {min: 0, max: 2}
-    },
-    {
-      col: {min: 6, max: 8},
-      row: {min: 3, max: 5}
-    },
-    {
-      col: {min: 6, max: 8},
-      row: {min: 6, max: 8}
-    },
-  ]
-  
-  blocks.forEach(block => {
-    let coords = generateUniqueMap(block.row, block.col, count)
-    coords.forEach(coord => {
-      grid[coord[0]][coord[1]] = '';
-    })
+  blocksCoords.forEach(block => {
+  let randomPositions = shuffle(block).slice(0,count);
+
+  randomPositions.forEach(position => {
+    grid[position[0]][position[1]] = '';
+  })
+
   })
   return grid;
 }
 
-function generateUniqueMap(row, col, amount){
-  let coordMap = [];
-  let counter = 0;
 
-  while (counter < amount) {
-    let colCoord = generateRandomNumber(col.min,col.max)
-    let rowCoord = generateRandomNumber(row.min,row.max)
-    let coord = rowCoord.toString()+colCoord.toString()
-    if(coordMap.indexOf(coord) === -1){
-      coordMap.push(coord)
-      counter++
-    } 
-  }
-
-  return coordMap
+function checkUniqueArray(srcArray){
+  return srcArray.every((value, index) => srcArray.indexOf(value) === index);
 }
+// Function to validate the board when player has finished
+export function validateBoard(){
+  let board = [];
+  let allValid = true;
+  const rows = document.querySelectorAll('tr');
+  
+  rows.forEach(row => {
+    const rowCells = row.children;
+    let rowArray = [];
+    // Transform element node into array
+    Array.prototype.forEach.call(rowCells, (input) => {
+      rowArray.push(input.value);
+    })
+    board.push(rowArray)
+    console.log(board)
+  })
+
+
+  for (let row = 0; row < 9; row++) {
+    let tmpBlock = [];
+    blocksCoords[row].forEach(block=>{
+      tmpBlock.push(board[block[0]][block[1]])
+    })
+    console.log('theses are blocks'+JSON.stringify(tmpBlock))
+    if(!checkUniqueArray(tmpBlock)){
+      allValid = false;
+      break
+    }
+    if(!checkUniqueArray(board[row])){
+      allValid = false;
+      break
+    }
+    let tmpCol = []
+    for (let col = 0; col < 9; col++) {
+    tmpCol.push(board[col][row])
+    }
+    console.log('theses are tmpcol'+JSON.stringify(tmpCol))
+    
+    if(!checkUniqueArray(tmpCol)){
+      allValid = false;
+      break;
+    }
+  }
+  return allValid
+}
+document.querySelector('#validate-button').addEventListener('click',()=>{
+  const success = document.querySelector('#success');
+  const failure = document.querySelector('#failure');
+  let allValid = validateBoard();
+  if (allValid === true){
+  if (success.style.display === 'none' || success.style.display === ''){
+      success.style.display = 'block';
+  }else{
+      success.style.display = 'none';
+  }
+  }else if(failure.style.display === 'none' || failure.style.display === ''){
+    failure.style.display = 'block';
+}else{
+    failure.style.display = 'none';
+
+  }})
