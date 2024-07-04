@@ -182,6 +182,8 @@ export function validateBoard(){
   }
   return allValid
 }
+
+// Function to display a success or failure message when the validation is processed.
 document.querySelector('#validate-button').addEventListener('click',()=>{
   const success = document.querySelector('#success');
   const failure = document.querySelector('#failure');
