@@ -139,11 +139,6 @@ p:hover{
     cursor: pointer;
 }
 
-footer {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
 #credits{
     position: fixed;
     top: 0%;
