@@ -46,13 +46,13 @@ export function changeDifficulty(event){
     event.target.classList.add('selected');
     switch(event.target.name){
         case 'easy':
-            generateGameTable(5);
+            generateGameTable(3);
             break;
         case 'medium':
-            generateGameTable(6);
+            generateGameTable(4);
             break;
         case 'hard':
-            generateGameTable(7);
+            generateGameTable(5);
             break;
     }
 }

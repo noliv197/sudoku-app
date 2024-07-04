@@ -6,13 +6,13 @@ document.querySelector('[data-btn="newGame"]').addEventListener('click', ()=>{
     let levelButton = document.querySelector('button.selected')
     switch(levelButton.name){
         case 'easy':
-            generateGameTable(2);
+            generateGameTable(3);
             break;
         case 'medium':
-            generateGameTable(6);
+            generateGameTable(4);
             break;
         case 'hard':
-            generateGameTable(7);
+            generateGameTable(5);
             break;
     }
 })
