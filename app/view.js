@@ -81,7 +81,7 @@ export function generateGameTable(difficulty){
         message.style.display = 'none';
     })
     document.querySelector('#validate-button').setAttribute('disabled','')
-    // Genarate solved sudoku grid
+    // Genarate solved sudoku grid :D
     let sudokuGrid  = generateSudokuGrid();
     sudokuGrid = hideCells(sudokuGrid,difficulty);
     const rows = document.querySelectorAll('tr');
